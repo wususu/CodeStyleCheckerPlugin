@@ -14,7 +14,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
-@SupportedAnnotationTypes("checker.Checker")
+@SupportedAnnotationTypes("*")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class CheckerProcessor  extends AbstractProcessor{
 
@@ -33,7 +33,7 @@ public class CheckerProcessor  extends AbstractProcessor{
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 		// TODO Auto-generated method stub
-		Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Checker.class);
+		Set<? extends Element> elements = roundEnv.getRootElements();
 		for (Element element : elements) {
 			nrChecker.check(element);
 		}
@@ -46,7 +46,7 @@ public class CheckerProcessor  extends AbstractProcessor{
 	}
 	
 	protected void note(WarnMsg warnMsg){
-		messager.printMessage(Diagnostic.Kind.NOTE, warnMsg.getMsg(), warnMsg.getElement());
+		messager.printMessage(Diagnostic.Kind.WARNING, warnMsg.getMsg(), warnMsg.getElement());
 	}
 
 }

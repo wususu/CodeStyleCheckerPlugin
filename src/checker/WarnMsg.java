@@ -61,6 +61,4 @@ public class WarnMsg {
 	public String toString() {
 		return "WarnMsg [element=" + element + ", msg=" + msg + "]";
 	}
-	
-	
 }
